@@ -43,7 +43,7 @@ export function activate(context: vscode.ExtensionContext) {
 
 export function newTextFormatter(text: string, regex: RegExp, keepDestructuring: boolean = false, libsForTest: LibsConfiguration[] = []) {
 	const configuration = vscode.workspace.getConfiguration('fix-imports');
-	const libs = libsForTest ?? configuration.get<LibsConfiguration[]>('libs', []);
+	const libs = libsForTest.length > 0 ? libsForTest : configuration.get<LibsConfiguration[]>('libs', []);
 
 	return text.replace(regex, (match, identifier, path) => {
 		const lib = libs.find(lib => path.includes(lib.lib));

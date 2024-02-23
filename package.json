@@ -1,8 +1,14 @@
 {
   "name": "fix-imports",
   "displayName": "fix-imports",
+  "publisher": "EvertonAdame",
   "description": "",
-  "version": "0.0.1",
+  "version": "1.1.1",
+  "repository": {
+    "type": "git",
+    "directory": "src",
+    "url": "https://github.com/evertonadame/fix-imports"
+  },
   "engines": {
     "vscode": "^1.86.0"
   },
@@ -15,7 +21,7 @@
     "commands": [
       {
         "command": "extension.adjustImports",
-        "title": "Hello World"
+        "title": "Fix files import"
       }
     ]
   },

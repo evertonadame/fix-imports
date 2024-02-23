@@ -1,0 +1,48 @@
+// Place your settings in this file to overwrite default and user settings.
+{
+  "files.exclude": {
+    "out": false // set this to true to hide the "out" folder with the compiled JS files
+  },
+  "search.exclude": {
+    "out": true // set this to false to include "out" folder in search results
+  },
+  // Turn off tsc task auto detection since we have the necessary tasks as npm scripts
+  "typescript.tsc.autoDetect": "off",
+  "myExtension": {
+    "libs": [
+      {
+        "lib": "@infralabs/admin-utility-design-system",
+        "endPath": "dist/components",
+        "includeIndexFile": true,
+        "customFilesEndPaths": {
+          "Form": {
+            "forceEndPath": "dist/components/useDesignSystem.js"
+          }
+        }
+      },
+      {
+        "lib": "@infralabs/admin-utility-state-management",
+        "endPath": "dist/app",
+        "includeIndexFile": true,
+        "customFilesEndPaths": {
+          "tenantChannelStore": {
+            "forceEndPath": "dist/app/tenantChannelStore.js"
+          },
+          "useTenantChannelStore": {
+            "forceEndPath": "dist/app/tenantChannelStore.js"
+          }
+        }
+      },
+      {
+        "lib": "@infralabs/admin-utility-router",
+        "endPath": "dist",
+        "includeIndexFile": true
+      },
+      {
+        "lib": "@infralabs/admin-utility-i18n-client",
+        "endPath": "dist",
+        "includeIndexFile": true
+      }
+    ]
+  }
+}

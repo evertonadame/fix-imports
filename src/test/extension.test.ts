@@ -27,6 +27,4 @@ suite('Extension Test Suite', () => {
 			assert.equal(newText, correctFile);
 		});
 	});
-
-
 });

@@ -20,7 +20,7 @@
   "contributes": {
     "commands": [
       {
-        "command": "extension.adjustImports",
+        "command": "fix-imports.fix",
         "title": "Fix files import"
       }
     ]

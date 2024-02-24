@@ -2,7 +2,7 @@
 
 ## Descrição
 
-A extensão `fix-imports` é uma ferramenta para ajudar na formatação e organização de declarações de importação em arquivos JavaScript e TypeScript no VSCode. Ele oferece funcionalidades para ajustar automaticamente as importações com base em configurações definidas pelo usuário.
+A extensão `fix-imports` é uma ferramenta para ajudar na formatação e organização de declarações de importação em arquivos JavaScript e TypeScript no VSCode. Ela oferece funcionalidades para ajustar automaticamente as importações com base em configurações definidas pelo usuário.
 
 ## Funcionalidades
 
@@ -22,14 +22,11 @@ A extensão `fix-imports` é uma ferramenta para ajudar na formatação e organi
 
 A extensão `fix-imports` pode ser configurada por meio do arquivo `settings.json` do VSCode. Abaixo está um exemplo de como configurar as opções disponíveis:
 
-Opcionais:
-endPath: string - Caminho para o diretório onde os arquivos da biblioteca estão localizados.
-includeIndexFile: boolean - Indica se o arquivo de índice da biblioteca deve ser incluído na importação.
-customFilesEndPaths: object - Objeto que mapeia o nome do arquivo para um caminho personalizado.
+- **`endPath`**: Caminho para o diretório onde os arquivos da biblioteca estão localizados.
+- **`includeIndexFile`**: Indica se o arquivo de índice da biblioteca deve ser incluído na importação.
+- **`customFilesEndPaths`**: Objeto que mapeia o nome do arquivo para um caminho personalizado.
 
-No exemplo, quando o import for my-lib e não tiver dist e nem o index.js, eles serão automaticamente adicionados, porém quando o arquivo for CustomFile, ele será importado de custom-file, não de dist e nem do index.js.
-
-exemplo 1:
+### Exemplo 1:
 
 ```json
 {
@@ -48,13 +45,13 @@ exemplo 1:
 }
 ```
 
-old import: import myLib from 'my-lib';
-new import: import myLib from 'my-lib/dist/index.js';
+- **`old import`**: `import myLib from 'my-lib';`
+- **`new import`**: `import myLib from 'my-lib/dist/index.js';`
 
-custom file import: import CustomFile from 'my-lib';
-new custom file import: import CustomFile from 'my-lib/custom-file';
+- **`custom file import`**: `import CustomFile from 'my-lib';`
+- **`new custom file import`**: `import CustomFile from 'my-lib/custom-file';`
 
-exemplo 2:
+### Exemplo 2:
 
 ```json
 {
@@ -67,10 +64,10 @@ exemplo 2:
 }
 ```
 
-old import: import myExampleLib from 'my-example-lib';
-new import: import myExampleLib from 'my-example-lib/index.js';
+- **`old import`**: `import myExampleLib from 'my-example-lib';`
+- **`new import`**: `import myExampleLib from 'my-example-lib/index.js';`
 
-exemplo 3:
+### Exemplo 3:
 
 ```json
 {
@@ -83,5 +80,13 @@ exemplo 3:
 }
 ```
 
-old import: import Form from 'my-lib/components/form';
-new import: import Form from 'my-lib/components/form/index.js';
+- **`old import`**: `import Form from 'my-lib/components/form';`
+- **`new import`**: `import Form from 'my-lib/components/form/index.js';`
+
+## Comandos
+
+- **`fix-imports.fix`**: Ajusta as importações no arquivo atual.
+
+## Settings
+
+- **`fix-imports.libs`**: Lista de bibliotecas que devem ser consideradas ao ajustar as importações.

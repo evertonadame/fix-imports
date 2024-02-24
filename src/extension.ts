@@ -14,7 +14,7 @@ export type LibsConfiguration = {
 const jsFiles = ['js', 'jsx', 'ts', 'tsx', 'mjs', 'cjs', 'json', 'json5', 'jsonc', 'jsonc5', 'jsonc'];
 
 export function activate(context: vscode.ExtensionContext) {
-	let disposable = vscode.commands.registerCommand('extension.adjustImports', () => {
+	let disposable = vscode.commands.registerCommand('fix-imports.fix', () => {
 
 		if (vscode.window.activeTextEditor) {
 			const editor = vscode.window.activeTextEditor;
@@ -103,7 +103,7 @@ export function newTextFormatter(text: string, regex: RegExp, keepDestructuring:
 		return match;
 	});
 
-
+	// TODO: MOVE TO CONFIGURATION
 	const sortImport = ["error", {
 		ignoreCas: false,
 		ignoreDeclarationSort: false,

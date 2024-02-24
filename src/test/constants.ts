@@ -39,28 +39,28 @@ export const firstSuite = {
   ] as myExtension.LibsConfiguration[],
   wrongfile: `
             import { forwardRef, useCallback, useEffect, useImperativeHandle, useState } from 'react';
-            import ContentBox from '@my-design-system-lib/dist/components/content-box';
-            import Form from '@my-design-system-lib/dist/components/form';
-            import tenantChannelStore from '@my-state-libs/dist/app/tenantChannelStore.js';
-            import Divider from '@my-design-system-lib/dist/components/divider';
-            import { showScheduleInputTypes } from '../../utils/scheduledTypes';
-            import { useTenantChannel } from '../../hooks';
             import { useTranslation } from '@my-translation-lib';
             import { useParams } from '@my-router-lib';
+            import ContentBox from '@my-design-system-lib/dist/components/content-box';
+            import Divider from '@my-design-system-lib/dist/components/divider';
+            import Form from '@my-design-system-lib/dist/components/form';
+            import tenantChannelStore from '@my-state-libs/dist/app/tenantChannelStore.js';
+            import { showScheduleInputTypes } from '../../utils/scheduledTypes';
+            import { useTenantChannel } from '../../hooks';
             import type { customType } from '..types';
-            import type { TypographyProps } from '@my-design-system-lib/dist/components/typography';
-        `,
-  correctFile: `import { forwardRef, useCallback, useEffect, useImperativeHandle, useState } from 'react';
-import { useParams } from '@my-router-lib/dist/index.js';
-import { useTranslation } from '@my-translation-lib/dist/index.js';
-import ContentBox from '@my-design-system-lib/dist/components/content-box/index.js';
-import Divider from '@my-design-system-lib/dist/components/divider/index.js';
-import Form from '@my-design-system-lib/dist/components/form/useDesignSystem.js';
-import tenantChannelStore from '@my-state-libs/dist/app/tenantChannelStore.js';
-import { showScheduleInputTypes } from '../../utils/scheduledTypes';
-import { useTenantChannel } from '../../hooks';
-import type { customType } from '..types';
-import type { TypographyProps } from '@my-design-system-lib/dist/components/typography';`,
+            import type { TypographyProps } from '@my-design-system-lib/dist/components/typography';`,
+  correctFile: `
+            import { forwardRef, useCallback, useEffect, useImperativeHandle, useState } from 'react';
+            import { useTranslation } from '@my-translation-lib/dist/index.js';
+            import { useParams } from '@my-router-lib/dist/index.js';
+            import ContentBox from '@my-design-system-lib/dist/components/content-box/index.js';
+            import Divider from '@my-design-system-lib/dist/components/divider/index.js';
+            import Form from '@my-design-system-lib/dist/components/form/useDesignSystem.js';
+            import tenantChannelStore from '@my-state-libs/dist/app/tenantChannelStore.js';
+            import { showScheduleInputTypes } from '../../utils/scheduledTypes';
+            import { useTenantChannel } from '../../hooks';
+            import type { customType } from '..types';
+            import type { TypographyProps } from '@my-design-system-lib/dist/components/typography';`,
 };
 
 export const secondSuite = {
@@ -102,18 +102,18 @@ export const secondSuite = {
             import { useTranslation } from '@my-translation-lib';
             import { useParams } from '@my-router-lib';
             import type { customType } from '..types';
-            import type { TypographyProps } from '@my-design-system-lib/dist/components/typography';
-        `,
-  correctFile: `import { forwardRef, useCallback, useEffect, useImperativeHandle, useState } from 'react';
-import { useParams } from '@my-router-lib/dist/index.js';
-import { useTranslation } from '@my-translation-lib/dist/index.js';
-import ContentBox from '@my-design-system-lib/dist/components/content-box/useDesignSystem.js';
-import Divider from '@my-design-system-lib/dist/components/divider/index.js';
-import tenantChannelStore from '@my-state-libs/dist/app/tenantChannelStore.js';
-import { showScheduleInputTypes } from '../../utils/scheduledTypes';
-import { useTenantChannel } from '../../hooks';
-import type { customType } from '..types';
-import type { TypographyProps } from '@my-design-system-lib/dist/components/typography';`,
+            import type { TypographyProps } from '@my-design-system-lib/dist/components/typography';`,
+  correctFile: `
+            import { forwardRef, useCallback, useEffect, useImperativeHandle, useState } from 'react';
+            import ContentBox from '@my-design-system-lib/dist/components/content-box/useDesignSystem.js';
+            import tenantChannelStore from '@my-state-libs/dist/app/tenantChannelStore.js';
+            import Divider from '@my-design-system-lib/dist/components/divider/index.js';
+            import { showScheduleInputTypes } from '../../utils/scheduledTypes';
+            import { useTenantChannel } from '../../hooks';
+            import { useTranslation } from '@my-translation-lib/dist/index.js';
+            import { useParams } from '@my-router-lib/dist/index.js';
+            import type { customType } from '..types';
+            import type { TypographyProps } from '@my-design-system-lib/dist/components/typography';`,
 };
 
 export const emptySuite = {
@@ -129,16 +129,16 @@ export const emptySuite = {
             import { useTranslation } from '@my-translation-lib';
             import { useParams } from '@my-router-lib';
             import type { customType } from '..types';
-            import type { TypographyProps } from '@my-design-system-lib/dist/components/typography';
-        `,
-  correctFile: `import { forwardRef, useCallback, useEffect, useImperativeHandle, useState } from 'react';
-import { useParams } from '@my-router-lib';
-import { useTranslation } from '@my-translation-lib';
-import ContentBox from '@my-design-system-lib/dist/components/content-box';
-import Divider from '@my-design-system-lib/dist/components/divider';
-import tenantChannelStore from '@my-state-libs/dist/app/tenantChannelStore.js';
-import { showScheduleInputTypes } from '../../utils/scheduledTypes';
-import { useTenantChannel } from '../../hooks';
-import type { customType } from '..types';
-import type { TypographyProps } from '@my-design-system-lib/dist/components/typography';`,
+            import type { TypographyProps } from '@my-design-system-lib/dist/components/typography';`,
+  correctFile: `
+            import { forwardRef, useCallback, useEffect, useImperativeHandle, useState } from 'react';
+            import ContentBox from '@my-design-system-lib/dist/components/content-box';
+            import tenantChannelStore from '@my-state-libs/dist/app/tenantChannelStore.js';
+            import Divider from '@my-design-system-lib/dist/components/divider';
+            import { showScheduleInputTypes } from '../../utils/scheduledTypes';
+            import { useTenantChannel } from '../../hooks';
+            import { useTranslation } from '@my-translation-lib';
+            import { useParams } from '@my-router-lib';
+            import type { customType } from '..types';
+            import type { TypographyProps } from '@my-design-system-lib/dist/components/typography';`,
 };

@@ -45,7 +45,7 @@ export function newTextFormatter(text: string, regex: RegExp, keepDestructuring:
 	const configuration = vscode.workspace.getConfiguration('fix-imports');
 	const libs = libsForTest.length > 0 ? libsForTest : configuration.get<LibsConfiguration[]>('libs', []);
 
-	return text.replace(regex, (match, identifier, path) => {
+	const replacedText = text.replace(regex, (match, identifier, path) => {
 		const lib = libs.find(lib => path.includes(lib.lib));
 		const customFilesEndPaths = lib?.customFilesEndPaths;
 		let newPath = path;
@@ -102,6 +102,103 @@ export function newTextFormatter(text: string, regex: RegExp, keepDestructuring:
 
 		return match;
 	});
+
+
+	const sortImport = ["error", {
+		ignoreCas: false,
+		ignoreDeclarationSort: false,
+		ignoreMemberSort: false,
+		memberSyntaxSortOrder: ["none", "all", "multiple", "single"],
+		allowSeparatedGroups: false
+	}];
+
+	const sortedImports = sortImports(replacedText, sortImport);
+
+	return sortedImports;
 }
+
+
+function sortImports(imports: string, config: any) {
+	const { memberSyntaxSortOrder, ignoreCas, ignoreDeclarationSort, ignoreMemberSort, allowSeparatedGroups } = config;
+
+	// Função auxiliar para comparar duas importações
+	function compareImports(a: string, b: string) {
+		if (ignoreCas) {
+			a = a.toLowerCase();
+			b = b.toLowerCase();
+		}
+		if (ignoreDeclarationSort) {
+			return 0; // Mantém a ordem original
+		}
+		if (ignoreMemberSort) {
+			return 0; // Mantém a ordem original
+		}
+		// Se estiver ordenando membros, verifique o índice de cada membro na matriz memberSyntaxSortOrder
+		if (memberSyntaxSortOrder && memberSyntaxSortOrder.length > 0) {
+			const indexA = memberSyntaxSortOrder.indexOf(a);
+			const indexB = memberSyntaxSortOrder.indexOf(b);
+			// Ordena de acordo com a ordem especificada em memberSyntaxSortOrder
+			return indexA - indexB;
+		}
+		// Ordem padrão: ordenação alfabética
+		return a.localeCompare(b);
+	}
+
+	// Dividir a string de imports em linhas e remover qualquer espaço em branco extra
+	const importLines = imports.split('\n').map(line => line.trim());
+
+	// Filtrar qualquer linha em branco
+	const filteredLines = importLines.filter(line => line.length > 0);
+
+	// Separar os imports agrupados por linha
+	const groupedImports = allowSeparatedGroups ? filteredLines.reduce((acc: string[], line) => {
+		const lastLine = acc.length > 0 ? acc[acc.length - 1] : '';
+		if (lastLine.endsWith(',') || lastLine.endsWith('{')) {
+			acc[acc.length - 1] = `${lastLine} ${line}`;
+		} else {
+			acc.push(line);
+		}
+		return acc;
+	}, []) : filteredLines;
+
+	// Dividir as importações em externas e relativas
+	const externalImports = [] as string[];
+	const relativeImports = [] as string[];
+	const typeImports = [] as string[];
+
+	groupedImports.forEach(importLine => {
+		if (importLine.includes('from ') && importLine.includes("'") && importLine.includes("'")) {
+			const fromIndex = importLine.indexOf('from ') + 'from '.length;
+			const libraryPath = importLine.substring(fromIndex, importLine.indexOf("'", fromIndex + 1) + 1);
+			if (importLine.includes('type')) {
+				typeImports.push(importLine);
+			} else if (libraryPath.startsWith("'..")) {
+				relativeImports.push(importLine);
+			} else if (libraryPath.startsWith("'.")) {
+
+				relativeImports.push(importLine);
+			} else {
+				externalImports.push(importLine);
+			}
+		} else {
+			externalImports.push(importLine);
+		}
+	});
+
+	// Ordenar importações externas e relativas
+	const sortedExternalImports = externalImports.sort((a, b) => compareImports(a, b));
+	const sortedRelativeImports = relativeImports.sort((a, b) => {
+		const levelA = (a.match(/\.\./g) ?? []).length;
+		const levelB = (b.match(/\.\./g) ?? []).length;
+		return levelA - levelB;
+	});
+
+	// Reconstruir a string de imports
+	const sortedImports = [...sortedExternalImports, ...sortedRelativeImports, ...typeImports];
+	const sortedImportsString = sortedImports.join('\n');
+
+	return sortedImportsString;
+}
+
 
 export function deactivate() { }

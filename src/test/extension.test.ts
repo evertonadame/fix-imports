@@ -11,7 +11,7 @@ suite('Extension Test Suite', () => {
 	vscode.window.showInformationMessage('Start all tests.');
 
 	suites.forEach((suite) => {
-		test('Should return the correct lib for the given path', async () => {
+		test(`${suite.name} test`, async () => {
 			const { wrongfile, correctFile, libs } = suite;
 			// Default imports (import x from 'y')
 			const regexDefaultImports = /import\s+(\w+)\s+from\s+['"](.+)['"]/g;
@@ -23,7 +23,6 @@ suite('Extension Test Suite', () => {
 
 			newText = myExtension.newTextFormatter(newText, regexDefaultImports, false, libs);
 			newText = myExtension.newTextFormatter(newText, regexDestructuring, true, libs);
-
 
 			assert.equal(newText, correctFile);
 		});
